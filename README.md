@@ -1,6 +1,6 @@
-# Postman Visualizing for Webex
+# Postman Visualizing with Webex
 
-*Postman Visualizing for Webex for DevNet Create*
+*Postman Visualizing with Webex for DevNet Create 2021*
 
 ---
 
@@ -16,7 +16,8 @@
 
 ## Motivation
 
-Include a short description of the motivation behind the creation and maintenance of the project.  Explain **why** the project exists.
+This project is intended to show off some of the webex analytcis apis and turn their response into something illustrative. Since the the try-it feature on developer.webex.com does not currently work for any of the analytics.webexapis.com endpoints, this further reinforces that postman is a great tool for this job. 
+    
 
 ## Show Me!
 
