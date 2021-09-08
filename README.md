@@ -71,6 +71,7 @@ pm.visualizer.set(template, {
 ```
 
 Plugging this into the "tests" area of postman and re-sending our GET request now provides a new response type, "Visualize." 
+
 ![Raw Numbers](./raw-numbers.jpg)
 
 Pretty simple right?Now we'll go a bit further and add some HTML table structure and the rest of the values. So the new template looks like this:
@@ -111,6 +112,7 @@ While it's easier to read than the original JSON response, we can do better.
 ### Step 4 Graphs
 
 Postman has a [guide on their site that includes a readymade test Bar Chart using ChartJs](https://documenter.postman.com/view/4946945/SVzz4KxB?version=latest). One of the golden rules of coding is if the code exists, the don't re-write it. So we are going to follow their example and just replace their data with ours.  On their site I can "Run in Postman" and import their sample code. 
+
 ![sample bar chart](./bar-chart-2d-sample.jpg)
 
 I won't copy their full code here, instead just the few lines that need to be changed. If you wish to follow along I suggest you import their sample and review the comments about how it works. Their code uses ChartJs's bar chart (which works), so I just need to alter the labels and the data. 
@@ -134,6 +136,7 @@ data: res.items.map(({max}) => max)
 The rest is just cosmetic. We will simply replace the title "Count" with "Maximum Daily Humidity", the x axis label string of "Time Slot" with "Date" and the y axis label "Count" with "Humidity (%)".
 
 ![final chart](./final-chart.jpg)
+
 There we have it! Simple visualization of our data. There's so much more we can do.  I challenge you to dig a little deeper into ChartJs and see how it can impact your API calls. 
 
 ## Authors & Maintainers
