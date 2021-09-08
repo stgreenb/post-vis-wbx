@@ -46,7 +46,7 @@ Now I am ready to get my JSON response. In postman I am going to do a new GET, t
 * from: I am going to enter Aug 1 as the starting date & time. In ISO 8601 that will be 2021-08-01T00:00:00.000Z
 * to: I will enter Aug 30 as the ending date & time. In ISO 8601 that will be 2021-08-30T00:00:00.000Z
 * SortBy: Tables & graphs look super wierd if you go in reverse date order so I highly recomend setting this to 'oldestFirst'
-![Basic request](./basic request.jpg)
+![Basic request](./basic-request.jpg)
 The response I get is a list of the humidity in the room over the 30 days. Although Postman by default tries to pretty up the JSON, it's still not as readable as it could be.
 
 ![Raw_json](./raw_json.jpg)
@@ -71,7 +71,7 @@ pm.visualizer.set(template, {
 ```
 
 Plugging this into the "tests" area of postman and re-sending our GET request now provides a new response type, "Visualize." 
-![Raw Numbers](./raw numbers.jpg)
+![Raw Numbers](./raw-numbers.jpg)
 
 Pretty simple right?Now we'll go a bit further and add some HTML table structure and the rest of the values. So the new template looks like this:
 ```
@@ -133,7 +133,7 @@ data: res.items.map(({max}) => max)
 
 The rest is just cosmetic. We will simply replace the title "Count" with "Maximum Daily Humidity", the x axis label string of "Time Slot" with "Date" and the y axis label "Count" with "Humidity (%)".
 
-![final chart](./final chart.jpg)
+![final chart](./final-chart.jpg)
 There we have it! Simple visualization of our data. There's so much more we can do.  I challenge you to dig a little deeper into ChartJs and see how it can impact your API calls. 
 
 ## Authors & Maintainers
