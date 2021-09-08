@@ -2,6 +2,8 @@
 
 *Postman Visualizing with Webex for DevNet Create 2021*
 
+You know that Postman can be used to quickly test APIs, but did you also know that it can output graphs and charts?  These visualizations can help you analyze the output in a more simple or intuitive way. This repo is designed to provide an overview of historical reporting APIs from Webex and show how to use postman’s visualizer to render its responses into illustrative html.
+
 ---
 
 ## Motivation
