@@ -46,7 +46,9 @@ Now I am ready to get my JSON response. In postman I am going to do a new GET, t
 * from: I am going to enter Aug 1 as the starting date & time. In ISO 8601 that will be 2021-08-01T00:00:00.000Z
 * to: I will enter Aug 30 as the ending date & time. In ISO 8601 that will be 2021-08-30T00:00:00.000Z
 * SortBy: Tables & graphs look super wierd if you go in reverse date order so I highly recomend setting this to 'oldestFirst'
+
 ![Basic request](./basic-request.jpg)
+
 The response I get is a list of the humidity in the room over the 30 days. Although Postman by default tries to pretty up the JSON, it's still not as readable as it could be.
 
 ![Raw_json](./raw_json.jpg)
