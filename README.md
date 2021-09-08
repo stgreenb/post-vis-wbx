@@ -30,9 +30,13 @@ I spend much of my time focused on Cisco's partner community, so I am going to u
 ### Step 2 Get your Access Token
 Cisco Webex APIs use bearer tokens for authentication. A quick method to turn a username & password into a token is to login to the [Webex Developer Getting Started Page](https://developer.webex.com/docs/api/getting-started) and click on the copy button (save the token for later). _Note: while this is good for a demo/test, oauth should be used in place of personal tokens for any production application._
 
+![Bearer Token](./bearer.jpg)
+
 ### Step 3 Start with JSON
 
 Before we add visualization, we should start with a basic JSON response from an Webex endpoint via [Postman](https://www.postman.com) ([install postman](https://www.postman.com/downloads/) if you have not already). For the past several years, the video endpoints Cisco has produced include a wide variety of sensors and artificial intelligence that can measure People Count, Temperature, humidity and more. The analytics demotoolbox org has devices in it that are reporting back lots of that data that we can use for our first visualization. _Note: I am going to choose an endpoint that makes a good demo, but concepts below could apply to any analytic endpoint._  The endpoint we need is "workspaceMetrics", but it requires us knowing a valid workspace (think of this as the location where the video device is installed). In postman (or via the "try it feature" on the [developer portal](https://developer.webex.com/docs/api/v1/workspaces/list-workspaces)) we can send a GET request to https://webexapis.com/v1/workspaces and the response will show us a list of workspaces. In postman we will need to include the header "authorization Bearer" followed by the token previously saved (if you use the developer portal, the bearer will be entered for you if you have logged in). In the analytics demo, I know that the "CxO Desk Pro" has some data associated to it, so I am going to save its "id".
+
+![Workspace_id](./workspace_id.jpg)
 
 Now I am ready to get my JSON response. In postman I am going to do a new GET, this time to https://webexapis.com/v1/workspaceMetrics endpoint. I will use the same bearer token, but for metrics we will need to provide ouple extra parameters:
 
@@ -42,14 +46,16 @@ Now I am ready to get my JSON response. In postman I am going to do a new GET, t
 * from: I am going to enter Aug 1 as the starting date & time. In ISO 8601 that will be 2021-08-01T00:00:00.000Z
 * to: I will enter Aug 30 as the ending date & time. In ISO 8601 that will be 2021-08-30T00:00:00.000Z
 * SortBy: Tables & graphs look super wierd if you go in reverse date order so I highly recomend setting this to 'oldestFirst'
-
+![Basic request](./basic request.jpg)
 The response I get is a list of the humidity in the room over the 30 days. Although Postman by default tries to pretty up the JSON, it's still not as readable as it could be.
+
+![Raw_json](./raw_json.jpg)
 
 ### Step 4 PM Visualizing with Tables
 
 Looking back at the response we previously got, we are going to try and track the max humidity over the month. Using standard JSON nomenclature the "items" is array objects I got as part of the response. I want value that goes with the "max" key across the array.  Postman allows for Test scripts (written in JavaScript) that can be applied to any request. The pm.visualizer method can be called as part of a test to render HTML output. 
 
-Here's the starting Javascript that shows the basics. The top half of the code is a handlebar template designed to loop over each response and provide the max value. The bottom half invokes the visualizer method passing it the template and the response data.
+Here's the starting Javascript that shows the basics. The top half of the code is a [handlebar template](https://handlebarsjs.com/) designed to loop over each response and provide the max value. The bottom half invokes the visualizer method passing it the template and the response data.
 ```
 var template = `
 {{#each response.items}}
@@ -64,7 +70,10 @@ pm.visualizer.set(template, {
 });
 ```
 
-Plugging this into the "tests" area of postman and re-sending our GET request now provides a new response type, "Visualize." Pretty simple right? Now we'll go a bit further and add some HTML table structure and the rest of the values. So the new template looks like this:
+Plugging this into the "tests" area of postman and re-sending our GET request now provides a new response type, "Visualize." 
+![Raw Numbers](./raw numbers.jpg)
+
+Pretty simple right?Now we'll go a bit further and add some HTML table structure and the rest of the values. So the new template looks like this:
 ```
 <table>
 <TR>
@@ -93,11 +102,16 @@ Plugging this into the "tests" area of postman and re-sending our GET request no
 </TR>
 </table>
 ```
+And our new output looks like this: 
+
+![table.jpg](./table.jpg)
+
 While it's easier to read than the original JSON response, we can do better. 
 
 ### Step 4 Graphs
 
 Postman has a [guide on their site that includes a readymade test Bar Chart using ChartJs](https://documenter.postman.com/view/4946945/SVzz4KxB?version=latest). One of the golden rules of coding is if the code exists, the don't re-write it. So we are going to follow their example and just replace their data with ours.  On their site I can "Run in Postman" and import their sample code. 
+![sample bar chart](./bar-chart-2d-sample.jpg)
 
 I won't copy their full code here, instead just the few lines that need to be changed. If you wish to follow along I suggest you import their sample and review the comments about how it works. Their code uses ChartJs's bar chart (which works), so I just need to alter the labels and the data. 
 
@@ -119,6 +133,7 @@ data: res.items.map(({max}) => max)
 
 The rest is just cosmetic. We will simply replace the title "Count" with "Maximum Daily Humidity", the x axis label string of "Time Slot" with "Date" and the y axis label "Count" with "Humidity (%)".
 
+![final chart](./final chart.jpg)
 There we have it! Simple visualization of our data. There's so much more we can do.  I challenge you to dig a little deeper into ChartJs and see how it can impact your API calls. 
 
 ## Authors & Maintainers
