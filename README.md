@@ -19,8 +19,9 @@ REST APIs, Cisco Webex, Postman
 ### Step 1 Select an Webex Org to Analyze 
 
 To get the most of out of this project you are going to want to have a Webex site for which:  
-1. You have an account with either read-only-admin or full-admin roles for the given org. Some endpoints may require  the access token must have the analytics:read_all scope the org may need to be licensed for pro pack (example: meeting/qualities).
+1. You have an account with either read-only-admin or full-admin roles for the given org. Some endpoints may require the access token must have the analytics:read_all scope the org may need to be licensed for pro pack (example: meeting/qualities).
 2. Preferably, the org has some historical data in it (though you can always add some) to retrive.
+3. The site should have a device in it. Again, this is not a hard rule, but the example API endpoint I've chosen to demonstrate assumes you have an video device in a workspace. 
 
 If you do not have an site that meets these requirements you could:
 * Use [Cisco's demo toolbox to spin up an analytics org](https://demotoolbox.cat-dcloud.com/demo/demo-webex-analytics). This is the best method, as there is a lot of fake data already in the org, however access is limited to Cisco Employees and Partners. If you haven't used it before, there are step-by-step guides on the toolbox page to get you started.
@@ -36,7 +37,11 @@ Cisco Webex APIs use bearer tokens for authentication. A quick method to turn a 
 
 ### Step 3 Start with JSON
 
-Before we add visualization, we should start with a basic JSON response from an Webex endpoint via [Postman](https://www.postman.com) ([install postman](https://www.postman.com/downloads/) if you have not already). For the past several years, the video endpoints Cisco has produced include a wide variety of sensors and artificial intelligence that can measure People Count, Temperature, humidity and more. The analytics demotoolbox org has devices in it that are reporting back lots of that data that we can use for our first visualization. _Note: I am going to choose an endpoint that makes a good demo, but concepts below could apply to any analytic endpoint._  The endpoint we need is "workspaceMetrics", but it requires us knowing a valid workspace (think of this as the location where the video device is installed). In postman (or via the "try it feature" on the [developer portal](https://developer.webex.com/docs/api/v1/workspaces/list-workspaces)) we can send a GET request to https://webexapis.com/v1/workspaces and the response will show us a list of workspaces. In postman we will need to include the header "authorization Bearer" followed by the token previously saved (if you use the developer portal, the bearer will be entered for you if you have logged in). In the analytics demo, I know that the "CxO Desk Pro" has some data associated to it, so I am going to save its "id".
+Before we add visualization, we should start with a basic JSON response from an Webex endpoint via [Postman](https://www.postman.com) ([install postman](https://www.postman.com/downloads/) if you have not already). For the past several years, the video endpoints Cisco has produced include a wide variety of sensors and artificial intelligence that can measure People Count, Temperature, humidity and more. The analytics demotoolbox org has devices in it that are reporting back lots of that data that we can use for our first visualization. _Note: I am going to choose an endpoint that makes a good demo, but concepts below could apply to any analytic endpoint._  The endpoint we need is "workspaceMetrics", but it requires us knowing a valid workspace (think of this as the location where the video device is installed). In postman (or via the "try it feature" on the [developer portal](https://developer.webex.com/docs/api/v1/workspaces/list-workspaces)) we can send a GET request to https://webexapis.com/v1/workspaces and the response will show us a list of workspaces. In postman we will need to include the header "authorization Bearer" followed by the token previously saved (if you use the developer portal, the bearer will be entered for you if you have logged in).
+
+![postman-bearer.jpg](./postman-bearer.jpg)
+
+In the analytics demo, I know that the "CxO Desk Pro" has some data associated to it, so I am going to save its "id".
 
 ![Workspace_id](./workspace_id.jpg)
 
