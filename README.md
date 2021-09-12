@@ -52,7 +52,7 @@ Now I am ready to get my JSON response. In postman I am going to do a new GET, t
 * aggregation: I am going to choose daily, but possible values include none, hourly, & daily
 * from: I am going to enter Aug 1 as the starting date & time. In ISO 8601 that will be 2021-08-01T00:00:00.000Z
 * to: I will enter Aug 30 as the ending date & time. In ISO 8601 that will be 2021-08-30T00:00:00.000Z
-* SortBy: Tables & graphs look super wierd if you go in reverse date order so I highly recomend setting this to 'oldestFirst'
+* SortBy: Tables & graphs look super weird if you go in reverse date order so I highly recomend setting this to 'oldestFirst'
 
 ![Basic request](./basic-request.jpg)
 
@@ -83,7 +83,7 @@ Plugging this into the "tests" area of postman and re-sending our GET request no
 
 ![Raw Numbers](./raw-numbers.jpg)
 
-Pretty simple right?Now we'll go a bit further and add some HTML table structure and the rest of the values. So the new template looks like this:
+Pretty simple right? Now we'll go a bit further and add some HTML table structure and the rest of the values. We are going to replac the template variable above with the following:
 ```
 <table>
 <TR>
